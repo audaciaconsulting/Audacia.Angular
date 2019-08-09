@@ -1,0 +1,15 @@
+name: $(Build.BuildId).$(Year:yy)$(DayOfYear)
+resources: { repositories: [ { repository: templates, type: git, name: Audacia/Audacia.Build.Templates } ] }
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include: /interceptors/projects/audacia/base-url-interceptor
+
+steps:
+
+- template: steps/build/npm.yaml@templates
+  parameters:
+    project: /interceptors/projects/audacia/base-url-interceptor
+    test: true
