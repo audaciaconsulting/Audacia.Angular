@@ -10,7 +10,7 @@ trigger:
 
 steps:
 
-- template: steps/build/npm.yaml@templates
+- template: steps/build/ng-package.yaml@templates
   parameters:
     project: /interceptors/projects/audacia/base-url-interceptor
     test: true
