@@ -5,11 +5,11 @@ trigger:
     include:
     - master
   paths:
-    include: /interceptors/projects/audacia/base-url-interceptor
+    include: '/interceptors/projects/audacia/base-url-interceptor'
 
 steps:
 
 - template: steps/build/npm.yaml@templates
   parameters:
-    project: /interceptors/projects/audacia/base-url-interceptor
+    project: '/interceptors/projects/audacia/base-url-interceptor'
     test: true
