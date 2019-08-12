@@ -12,7 +12,7 @@ steps:
 
 - template: /steps/npm/authenticate.yaml
   parameters:
-    project: ${{ parameters.project }}
+    project: $(Build.SourcesDirectory)/interceptors/projects/audacia/base-url-interceptor
 
 - task: Npm@1
   displayName: Install
@@ -26,15 +26,15 @@ steps:
   displayName: Build
   inputs:
     command: custom
-    workingDir: $(Build.SourcesDirectory)/${{ parameters.project }}
+    workingDir: $(Build.SourcesDirectory)/interceptors/projects/audacia/base-url-interceptor
     verbose: false
     customCommand: 'run ng -- build'
 
 - template: /steps/npm/test.yaml
   parameters:
-    project: ${{ parameters.project }}
+    project: $(Build.SourcesDirectory)/interceptors/projects/audacia/base-url-interceptor
     test: ${{ parameters.test }}
 
 - template: /steps/npm/publish.yaml
   parameters:
-    project: ${{ parameters.project }}
+    project: $(Build.SourcesDirectory)/interceptors/projects/audacia/base-url-interceptor
