@@ -16,7 +16,7 @@ jobs:
       command: custom
       workingDir: $(Build.SourcesDirectory)
       verbose: false
-      customCommand: 'ci'
+      customCommand: ci
 
   - task: Npm@1
     displayName: Build
@@ -24,12 +24,19 @@ jobs:
       command: custom
       workingDir: $(Build.SourcesDirectory)
       verbose: false
-      customCommand: 'run ng build @audacia/${{parameters.project}} --configuration=production'
+      customCommand: run ng build @audacia/${{parameters.project}} --configuration=production
 
   - template: /steps/npm/test.yaml@templates
     parameters:
       project: projects/audacia/${{parameters.project}}
       test: ${{parameters.test}}
+
+  - task: CopyFiles@2
+    displayName: Copy .npmrc
+    inputs:
+      Contents: .npmrc
+      TargetFolder: dist/audacia/${{parameters.project}}
+
 
   - task: PublishBuildArtifacts@1
     displayName: Publish
