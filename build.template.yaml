@@ -34,7 +34,7 @@ jobs:
   - task: CopyFiles@2
     displayName: Copy .npmrc
     inputs:
-      Contents: .npmrc
+      Contents: audacia/${{parameters.project}}/.npmrc
       TargetFolder: dist/audacia/${{parameters.project}}
 
 
