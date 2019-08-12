@@ -18,7 +18,7 @@ stages:
   jobs:
 
   - template: /release.template.yaml
-      parameters:
-        project: base-url-interceptor
-        test: false
+    parameters:
+      project: base-url-interceptor
+      test: false
 
