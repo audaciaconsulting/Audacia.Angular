@@ -16,7 +16,7 @@ jobs:
     displayName: Version
     inputs:
       packageJsonLocation: $(System.DefaultWorkingDirectory)/$(Build.DefinitionName)
-      packageName: @audacia/${{parameters.project}}
+      packageName: '@audacia/${{parameters.project}}'
 
   - task: Npm@1
     displayName: Publish
