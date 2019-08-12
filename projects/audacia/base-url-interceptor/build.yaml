@@ -6,7 +6,7 @@ trigger:
     - master
   paths:
     include:
-    - /interceptors/projects/audacia/base-url-interceptor
+    - /projects/audacia/base-url-interceptor
 
 steps:
 
