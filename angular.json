@@ -125,41 +125,6 @@
         }
       }
     },
-    "@angular/base-url-interceptor": {
-      "projectType": "library",
-      "root": "projects/angular/base-url-interceptor",
-      "sourceRoot": "projects/angular/base-url-interceptor/src",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/angular/base-url-interceptor/tsconfig.lib.json",
-            "project": "projects/angular/base-url-interceptor/ng-package.json"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/angular/base-url-interceptor/src/test.ts",
-            "tsConfig": "projects/angular/base-url-interceptor/tsconfig.spec.json",
-            "karmaConfig": "projects/angular/base-url-interceptor/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/angular/base-url-interceptor/tsconfig.lib.json",
-              "projects/angular/base-url-interceptor/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "@audacia/base-url-interceptor": {
       "projectType": "library",
       "root": "projects/audacia/base-url-interceptor",
