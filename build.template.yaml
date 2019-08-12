@@ -42,5 +42,5 @@ jobs:
   - task: PublishBuildArtifacts@1
     displayName: Publish
     inputs:
-      PathtoPublish: dist/audacia
+      PathtoPublish: dist/audacia/${{parameters.project}}
       ArtifactName: $(Build.DefinitionName)
