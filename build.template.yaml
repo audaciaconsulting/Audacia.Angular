@@ -39,4 +39,4 @@ steps:
   displayName: Publish
   inputs:
     PathtoPublish: dist/audacia
-    ArtifactName: $(Build.DefinitionName)/base-url-interceptor
+    ArtifactName: base-url-interceptor
