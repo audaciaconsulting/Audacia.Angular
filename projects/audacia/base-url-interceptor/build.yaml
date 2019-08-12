@@ -1,42 +1,10 @@
 name: $(Build.BuildId).$(Year:yy)$(DayOfYear)
 resources: { repositories: [ { repository: templates, type: git, name: Audacia/Audacia.Build.Templates } ] }
-trigger:
-  branches:
-    include:
-    - master
-  paths:
-    include:
-    - /projects/audacia/base-url-interceptor
+trigger: { branches: { include: [ master ] }, paths: { include: [ /projects/audacia/base-url-interceptor ] } }
 
 steps:
 
-- template: /steps/npm/authenticate.yaml@templates
+- template: /build.template.yaml
   parameters:
-    project: projects/audacia/base-url-interceptor
-
-- task: Npm@1
-  displayName: Install
-  inputs:
-    command: custom
-    workingDir: $(Build.SourcesDirectory)
-    verbose: false
-    customCommand: 'ci'
-
-- task: Npm@1
-  displayName: Build
-  inputs:
-    command: custom
-    workingDir: $(Build.SourcesDirectory)
-    verbose: false
-    customCommand: 'run ng build @audacia/base-url-interceptor --configuration=production'
-
-- template: /steps/npm/test.yaml@templates
-  parameters:
-    project: projects/audacia/base-url-interceptor
+    project: base-url-interceptor
     test: false
-
-- task: PublishBuildArtifacts@1
-  displayName: Publish
-  inputs:
-    PathtoPublish: dist/audacia/base-url-interceptor
-    ArtifactName: '$(Build.DefinitionName)'
