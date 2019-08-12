@@ -37,4 +37,4 @@ steps:
 
 - template: /steps/npm/publish.yaml@templates
   parameters:
-    project: projects/audacia/base-url-interceptor
+    project: dist/audacia/base-url-interceptor
