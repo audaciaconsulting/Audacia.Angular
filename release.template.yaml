@@ -1,0 +1,27 @@
+parameters:
+  project: ''
+  test: true
+
+jobs:
+- job:
+  steps:
+
+  - task: npmAuthenticate@0
+    displayName: 'npm Authenticate $(System.DefaultWorkingDirectory)/$(Build.DefinitionName)/.npmrc'
+    inputs:
+      workingFile: '$(System.DefaultWorkingDirectory)/$(Build.DefinitionName)/.npmrc'
+
+  - task: AudaciaNpmVersioning@0
+    displayName: 'Update version number'
+    inputs:
+      packageJsonLocation: '$(System.DefaultWorkingDirectory)/$(Build.DefinitionName)'
+      packageName: '@audacia/${{parameters.project}}'
+
+  - task: Npm@1
+    displayName: 'npm publish'
+    inputs:
+      command: publish
+      workingDir: '$(System.DefaultWorkingDirectory)/$(Build.DefinitionName)'
+      verbose: false
+      publishRegistry: useFeed
+      publishFeed: 'f09ace73-ace9-4751-ab42-2fada3f24d78'
