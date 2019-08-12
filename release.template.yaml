@@ -8,25 +8,24 @@ jobs:
   strategy:
     runOnce:
       deploy:
-      displayName: Deploy
-      steps:
+        steps:
 
-      - task: npmAuthenticate@0
-        displayName: Authenticate
-        inputs:
-          workingFile: $(System.DefaultWorkingDirectory)/$(Build.DefinitionName)/.npmrc
+        - task: npmAuthenticate@0
+          displayName: Authenticate
+          inputs:
+            workingFile: $(System.DefaultWorkingDirectory)/$(Build.DefinitionName)/.npmrc
 
-      - task: AudaciaNpmVersioning@0
-        displayName: Version
-        inputs:
-          packageJsonLocation: $(System.DefaultWorkingDirectory)/$(Build.DefinitionName)
-          packageName: '@audacia/${{parameters.project}}'
+        - task: AudaciaNpmVersioning@0
+          displayName: Version
+          inputs:
+            packageJsonLocation: $(System.DefaultWorkingDirectory)/$(Build.DefinitionName)
+            packageName: '@audacia/${{parameters.project}}'
 
-      - task: Npm@1
-        displayName: Publish
-        inputs:
-          command: publish
-          workingDir: $(System.DefaultWorkingDirectory)/$(Build.DefinitionName)
-          verbose: false
-          publishRegistry: useFeed
-          publishFeed: f09ace73-ace9-4751-ab42-2fada3f24d78
+        - task: Npm@1
+          displayName: Publish
+          inputs:
+            command: publish
+            workingDir: $(System.DefaultWorkingDirectory)/$(Build.DefinitionName)
+            verbose: false
+            publishRegistry: useFeed
+            publishFeed: f09ace73-ace9-4751-ab42-2fada3f24d78
