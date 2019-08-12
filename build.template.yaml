@@ -35,4 +35,4 @@ jobs:
     displayName: Publish
     inputs:
       PathtoPublish: dist/audacia
-      ArtifactName: ${{parameters.project}}
+      ArtifactName: $(Build.DefinitionName)
