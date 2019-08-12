@@ -2,35 +2,37 @@ parameters:
   project: ''
   test: true
 
-steps:
+jobs:
+- job:
+  displayName: ${{parameters.project}}
+  steps:
+  - template: /steps/npm/authenticate.yaml@templates
+    parameters:
+      project: projects/audacia/${{parameters.project}}
 
-- template: /steps/npm/authenticate.yaml@templates
-  parameters:
-    project: projects/audacia/${{parameters.project}}
+  - task: Npm@1
+    displayName: Install
+    inputs:
+      command: custom
+      workingDir: $(Build.SourcesDirectory)
+      verbose: false
+      customCommand: 'ci'
 
-- task: Npm@1
-  displayName: Install
-  inputs:
-    command: custom
-    workingDir: $(Build.SourcesDirectory)
-    verbose: false
-    customCommand: 'ci'
+  - task: Npm@1
+    displayName: Build
+    inputs:
+      command: custom
+      workingDir: $(Build.SourcesDirectory)
+      verbose: false
+      customCommand: 'run ng build @audacia/${{parameters.project}} --configuration=production'
 
-- task: Npm@1
-  displayName: Build
-  inputs:
-    command: custom
-    workingDir: $(Build.SourcesDirectory)
-    verbose: false
-    customCommand: 'run ng build @audacia/${{parameters.project}} --configuration=production'
+  - template: /steps/npm/test.yaml@templates
+    parameters:
+      project: projects/audacia/${{parameters.project}}
+      test: ${{parameters.test}}
 
-- template: /steps/npm/test.yaml@templates
-  parameters:
-    project: projects/audacia/${{parameters.project}}
-    test: false
-
-- task: PublishBuildArtifacts@1
-  displayName: Publish
-  inputs:
-    PathtoPublish: dist/audacia
-    ArtifactName: ${{parameters.project}}
+  - task: PublishBuildArtifacts@1
+    displayName: Publish
+    inputs:
+      PathtoPublish: dist/audacia
+      ArtifactName: ${{parameters.project}}
