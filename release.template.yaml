@@ -5,6 +5,8 @@ parameters:
 jobs:
 - deployment: Deploy
   displayName: Deploy
+  environment: NPM Internal
+  condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
   strategy:
     runOnce:
       deploy:

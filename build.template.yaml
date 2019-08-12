@@ -32,6 +32,7 @@ jobs:
       test: ${{parameters.test}}
 
   - task: CopyFiles@2
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
     displayName: Copy .npmrc
     inputs:
       SourceFolder: projects/audacia/${{parameters.project}}
@@ -40,6 +41,7 @@ jobs:
 
 
   - task: PublishBuildArtifacts@1
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
     displayName: Publish
     inputs:
       PathtoPublish: dist/audacia/${{parameters.project}}
