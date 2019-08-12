@@ -3,8 +3,8 @@ parameters:
   test: true
 
 jobs:
-- job:
-  displayName: ${{parameters.project}}
+- job: Build
+  displayName: Build
   steps:
   - template: /steps/npm/authenticate.yaml@templates
     parameters:
