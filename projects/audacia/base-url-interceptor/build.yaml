@@ -35,6 +35,8 @@ steps:
     project: projects/audacia/base-url-interceptor
     test: false
 
-- template: /steps/npm/publish.yaml@templates
-  parameters:
-    project: dist/audacia/base-url-interceptor
+- task: PublishBuildArtifacts@1
+  displayName: Publish
+  inputs:
+    PathtoPublish: dist/audacia/base-url-interceptor
+    ArtifactName: '$(Build.DefinitionName)'
