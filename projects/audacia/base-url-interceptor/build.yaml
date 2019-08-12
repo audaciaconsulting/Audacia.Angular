@@ -1,0 +1,40 @@
+name: $(Build.BuildId).$(Year:yy)$(DayOfYear)
+resources: { repositories: [ { repository: templates, type: git, name: Audacia/Audacia.Build.Templates } ] }
+trigger:
+  branches:
+    include:
+    - master
+  paths:
+    include:
+    - /interceptors/projects/audacia/base-url-interceptor
+
+steps:
+
+  - template: /steps/npm/authenticate.yaml
+    parameters:
+      project: ${{ parameters.project }}
+
+  - task: Npm@1
+    displayName: Install
+    inputs:
+      command: custom
+      workingDir: $(Build.SourcesDirectory)
+      verbose: false
+      customCommand: 'ci'
+
+  - task: Npm@1
+    displayName: Build
+    inputs:
+      command: custom
+      workingDir: $(Build.SourcesDirectory)/${{ parameters.project }}
+      verbose: false
+      customCommand: 'run ng -- build'
+
+  - template: /steps/npm/test.yaml
+    parameters:
+      project: ${{ parameters.project }}
+      test: ${{ parameters.test }}
+
+  - template: /steps/npm/publish.yaml
+    parameters:
+      project: ${{ parameters.project }}
