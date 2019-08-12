@@ -7,6 +7,8 @@ jobs:
   displayName: Deploy
   environment: NPM Internal
   condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+  pool:
+    vmImage: windows-latest
   strategy:
     runOnce:
       deploy:
