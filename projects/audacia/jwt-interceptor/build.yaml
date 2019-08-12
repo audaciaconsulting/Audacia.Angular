@@ -1,0 +1,10 @@
+name: $(Build.BuildId).$(Year:yy)$(DayOfYear)
+resources: { repositories: [ { repository: templates, type: git, name: Audacia/Audacia.Build.Templates } ] }
+trigger: { branches: { include: [ master ] }, paths: { include: [ /projects/audacia/jwt-interceptor ] } }
+
+jobs:
+
+- template: /build.template.yaml
+  parameters:
+    project: jwt-interceptor
+    test: false
