@@ -8,7 +8,6 @@ export class JwtInterceptorOptions {
     | Observable<string | null>;
   headerName: string;
   authScheme: string;
-  baseUrl: string;
   whitelistedDomains: Array<string | RegExp>;
   doNotAttachRoutes: Array<string | RegExp>;
   throwNoTokenError: boolean;
