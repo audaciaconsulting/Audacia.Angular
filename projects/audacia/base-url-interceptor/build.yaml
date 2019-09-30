@@ -1,5 +1,4 @@
 name: $(Build.BuildId).$(Year:yy)$(DayOfYear)
-resources: { repositories: [ { repository: templates, type: git, name: Audacia/Audacia.Build.Templates } ] }
 trigger: { branches: { include: [ master ] }, paths: { include: [ /projects/audacia/base-url-interceptor ] } }
 
 stages:
@@ -21,4 +20,3 @@ stages:
     parameters:
       project: base-url-interceptor
       test: false
-

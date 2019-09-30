@@ -1,5 +1,4 @@
 name: $(Build.BuildId).$(Year:yy)$(DayOfYear)
-resources: { repositories: [ { repository: templates, type: git, name: Audacia/Audacia.Build.Templates } ] }
 trigger: { branches: { include: [ master ] }, paths: { include: [ /projects/audacia/date-parse-interceptor ] } }
 
 jobs:
