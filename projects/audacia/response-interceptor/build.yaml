@@ -1,6 +1,8 @@
 name: $(Build.BuildId).$(Year:yy)$(DayOfYear)
-resources: { repositories: [ { repository: templates, type: git, name: Audacia/Audacia.Build.Templates } ] }
 trigger: { branches: { include: [ master ] }, paths: { include: [ /projects/audacia/response-interceptor ] } }
+pr: { branches: { include: [master] } }
+schedules: [ { cron: "0 0 * * *", displayName: Nightly Build, branches: { include: [ master ] } } ]
+resources: { repositories: [ { repository: templates, type: git, name: Audacia/Audacia.Build } ] }
 
 jobs:
 
