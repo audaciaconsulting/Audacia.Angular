@@ -81,7 +81,7 @@ export class JwtInterceptor implements HttpInterceptor {
     token: string | null,
     request: HttpRequest<any>,
     next: HttpHandler
-  ) {
+  ): Observable<HttpEvent<any>> {
     if (!token && this.throwNoTokenError) {
       throw new Error("Could not get token from tokenGetter function.");
     }
