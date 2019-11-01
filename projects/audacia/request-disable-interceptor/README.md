@@ -1,24 +1,145 @@
-# RequestDisableInterceptor
+# @audacia/request-disable-interceptor
 
-This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.2.0.
+This library is currently for use with RxJs 6+.
 
-## Code scaffolding
+This library provides an `HttpInterceptor` which keeps track of every Http Request and whether or not it is ongoing. This is then used to disable buttons and add an optional class to them.
 
-Run `ng generate component component-name --project request-disable-interceptor` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project request-disable-interceptor`.
-> Note: Don't forget to add `--project request-disable-interceptor` or else it will be added to the default project in your `angular.json` file. 
+> **Note:** This library can only be used with Angular 4.3 and higher because it relies on an `HttpInterceptor` from Angular's `HttpClient`. This feature is not available on lower versions.
 
-## Build
+## Pre-Installation
 
-Run `ng build request-disable-interceptor` to build the project. The build artifacts will be stored in the `dist/` directory.
+First thing that you will need to do is ensure that you have a registry entry for our NPM registry. To do this, follow the steps listed [here](https://audacia.visualstudio.com/Audacia/_wiki/wikis/Audacia.wiki?pagePath=%2FAudacia%20Wiki%2FCode%2FConfiguring%20a%20project%20to%20access%20the%20Audacia%20NPM%20registry&wikiVersion=GBwikiMaster).
 
-## Publishing
+## Installation
 
-After building your library with `ng build request-disable-interceptor`, go to the dist folder `cd dist/request-disable-interceptor` and run `npm publish`.
+Now that you have the registries setup you can install the package.
 
-## Running unit tests
+```bash
+# installation with npm
+npm install @audacia/request-disable-interceptor --save
+```
 
-Run `ng test request-disable-interceptor` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Usage: Injection
 
-## Further help
+Import the `AudaciaRequestDisableModule` module and add it to your imports list. Call the `forRoot` method and optionally provide a config value.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+Be sure to import the `HttpClientModule` as well.
+
+```ts
+import { HttpClientModule } from "@angular/common/http";
+import { NgModule } from "@angular/core";
+import { BrowserModule } from "@angular/platform-browser";
+import { AudaciaRequestDisableModule } from "@audacia/request-disable-interceptor";
+
+import { AppComponent } from "./app.component";
+
+@NgModule({
+  declarations: [AppComponent],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AudaciaRequestDisableModule.forRoot({
+      config: {
+        dateParseFunc: (val: string): any => {
+          return new Date(val);
+        }
+      }
+    })
+  ],
+  providers: [],
+  bootstrap: [AppComponent]
+})
+export class AppModule {}
+```
+
+Any requests sent using Angular's `HttpClient` will automatically count towards the application being in a "loading" state.
+
+```ts
+import { HttpClient } from "@angular/common/http";
+
+export class AppComponent {
+  constructor(public http: HttpClient) {}
+
+  ping() {
+    this.http
+      .get("api/things")
+      .subscribe(data => console.log(data), err => console.log(err));
+  }
+}
+```
+
+## Configuration Options
+
+### `additionalClass?: string`
+
+This is a class that gets applied to elements that have the directive `requestDisable` on them whilst the application is determined to be in the loading state.
+
+This is useful for adding spinners on buttons whilst a submit process is ongoing for example.
+
+```typescript
+RequestDisableModule.forRoot({
+        config: {
+            additionalClass: 'loading'
+        }
+})
+```
+
+### `doNotAddRoutes: Array<string | RegExp>`
+
+This is a list of routes that you do not want to count toward the application being in a loading state.
+
+This is useful for requests that run frequently in the background, eg caching tasks.
+
+```typescript
+RequestDisableModule.forRoot({
+    config: {
+        doNotAddRoutes: ['doNotAttachRoute']
+    }
+})
+```
+
+## Using a Custom Options Factory Function
+
+In some cases, you may need to provide a custom factory function to properly handle your configuration options. This is the case if any of your options reliy on a service or if you are using an asynchronous storage mechanism (like Ionic's `Storage`).
+
+Import the `REQUEST_DISABLE_OPTIONS` `InjectionToken` so that you can instruct it to use your custom factory function.
+
+Create a factory function and specify the options as you normally would if you were using `AudaciaRequestDisableModule.forRoot` directly. If you need to use a service in the function, list it as a parameter in the function and pass it in the `deps` array when you provide the function.
+
+```ts
+import { AudaciaRequestDisableModule, REQUEST_DISABLE_OPTIONS } from '@audacia/request-disable-interceptor';
+
+// ...
+
+export function requestDisableOptionsFactory(configService) {
+  return {
+    doNotAddRoutes: configService.getRequestDisableDoNotAddRoutes()
+  }
+}
+
+// ...
+
+@NgModule({
+  // ...
+  imports: [
+    AudaciaRequestDisableModule.forRoot({
+      provider: {
+        provide: REQUEST_DISABLE_OPTIONS,
+        useFactory: requestDisableOptionsFactory,
+        deps: [ConfigService]
+      }
+    })
+  ],
+  providers: [ConfigService]
+})
+```
+
+NOTE: If a `requestDisableOptionsFactory` is defined, then `config` is ignored. _Both configuration alternatives can't be defined at the same time_.
+
+## Issue Reporting
+
+If you have found a bug or if you have a feature request, then please email me `liam.ward@audacia.co.uk` or add it to the `Audacia` VSTS board if that is allowed?
+
+## Author
+
+Liam Ward on behalf of Audacia.
