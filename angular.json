@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/testbed",
+            "outputPath": "dist/@audacia/angular",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -62,18 +62,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "testbed:build"
+            "browserTarget": "@audacia/angular:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "testbed:build:production"
+              "browserTarget": "@audacia/angular:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "testbed:build"
+            "browserTarget": "@audacia/angular:build"
           }
         },
         "test": {
@@ -103,11 +103,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "testbed:serve"
+            "devServerTarget": "@audacia/angular:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "testbed:serve:production"
+              "devServerTarget": "@audacia/angular:serve:production"
             }
           }
         }
@@ -279,5 +279,5 @@
       }
     }
   },
-  "defaultProject": "testbed"
+  "defaultProject": "@audacia/angular"
 }

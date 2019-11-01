@@ -1,6 +1,5 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ModuleWithProviders } from '@angular/compiler/src/core';
-import { NgModule, Provider } from '@angular/core';
+import { ModuleWithProviders, NgModule, Provider } from '@angular/core';
 
 import { DateParseOptions } from './date-parse-options.model';
 import { DATE_PARSE_OPTIONS, DateParseInterceptor } from './date-parse.interceptor';
