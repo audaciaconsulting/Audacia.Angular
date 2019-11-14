@@ -61,7 +61,9 @@ export class AudaciaResponseHandlingInterceptor implements HttpInterceptor {
                         const reader = new FileReader();
 
                         reader.onloadend = _ => {
+                          if (typeof reader.result === 'string') {
                             this.processErrors(error, JSON.parse(reader.result));
+                          }
                         }
 
                         reader.readAsText(error.error);

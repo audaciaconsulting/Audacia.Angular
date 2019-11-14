@@ -18,7 +18,6 @@ export class JwtInterceptor implements HttpInterceptor {
     | Observable<string | null>;
   private headerName: string;
   private authScheme: string;
-  private baseUrl: string;
   private whitelistedDomains: Array<string | RegExp>;
   private doNotAttachRoutes: Array<string | RegExp>;
   private throwNoTokenError: boolean;
@@ -38,7 +37,6 @@ export class JwtInterceptor implements HttpInterceptor {
       config.authScheme || config.authScheme === ""
         ? config.authScheme
         : "Bearer";
-    this.baseUrl = config.baseUrl;
     this.whitelistedDomains = config.whitelistedDomains || [];
     this.doNotAttachRoutes = config.doNotAttachRoutes || [];
     this.throwNoTokenError = config.throwNoTokenError || false;
@@ -83,7 +81,7 @@ export class JwtInterceptor implements HttpInterceptor {
     token: string | null,
     request: HttpRequest<any>,
     next: HttpHandler
-  ) {
+  ): Observable<HttpEvent<any>> {
     if (!token && this.throwNoTokenError) {
       throw new Error("Could not get token from tokenGetter function.");
     }
@@ -149,28 +147,6 @@ export class JwtInterceptor implements HttpInterceptor {
     request: HttpRequest<any>,
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
-    // If the request that is being run does not have http(s) in the url
-    // then it means that we should be going to the baseUrl
-    if (
-      request.url.indexOf("http://") === -1 &&
-      request.url.indexOf("https://") === -1
-    ) {
-      let baseUrl = this.baseUrl;
-
-      // If the last character of the baseUrl and the first character
-      // of the request are /, then this means that we will have too many /s
-      if (baseUrl[baseUrl.length - 1] === "/" && request.url[0] === "/") {
-        baseUrl = baseUrl.substring(0, baseUrl.length - 1);
-      }
-      // If baseUrl does not end with a / and request url does not begin
-      // with /, this means that we need to add one
-      else if (baseUrl[baseUrl.length - 1] !== "/" && request.url[0] !== "/") {
-        baseUrl = `${baseUrl}/`;
-      }
-
-      request = request.clone({ url: `${baseUrl}${request.url}` });
-    }
-
     if (
       this.isWhitelistedDomain(request) &&
       !this.isDoNotAttachRoute(request)

@@ -1,6 +1,5 @@
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ModuleWithProviders } from '@angular/compiler/src/core';
-import { NgModule, Provider } from '@angular/core';
+import { ModuleWithProviders, NgModule, Provider } from '@angular/core';
 
 import { BaseUrlOptions } from './base-url-options.model';
 import { BASE_URL_OPTIONS, BaseUrlInterceptor } from './base-url.interceptor';
