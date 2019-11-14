@@ -1,25 +1,25 @@
 name: $(Build.BuildId).$(Year:yy)$(DayOfYear)
-trigger: { branches: { include: [ master ] }, paths: { include: [ /projects/audacia/base-url-interceptor ] } }
+trigger: { branches: { include: [ master ] }, paths: { include: [ /projects/audacia/request-disable-interceptor ] } }
 pr: { branches: { include: [master] } }
 schedules: [ { cron: "0 0 * * *", displayName: Nightly Build, branches: { include: [ master ] } } ]
 resources: { repositories: [ { repository: templates, type: git, name: Audacia/Audacia.Build } ] }
 
 stages:
 
-  - stage: Build
-    displayName: Build
-    jobs:
+- stage: Build
+  displayName: Build
+  jobs:
 
-      - template: /build.template.yaml
-        parameters:
-          project: base-url-interceptor
-          test: false
+    - template: /build.template.yaml
+      parameters:
+        project: request-disable-interceptor
+        test: false
 
-  - stage: Release
-    displayName: Release
-    jobs:
+- stage: Release
+  displayName: Release
+  jobs:
 
-      - template: /release.template.yaml
-        parameters:
-          project: base-url-interceptor
-          test: false
+    - template: /release.template.yaml
+      parameters:
+        project: request-disable-interceptor
+        test: false

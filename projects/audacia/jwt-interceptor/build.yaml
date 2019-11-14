@@ -6,20 +6,20 @@ resources: { repositories: [ { repository: templates, type: git, name: Audacia/A
 
 stages:
 
-  - stage: Build
-    displayName: Build
-    jobs:
+- stage: Build
+  displayName: Build
+  jobs:
 
-      - template: /build.template.yaml
-        parameters:
-          project: base-url-interceptor
-          test: false
+    - template: /build.template.yaml
+      parameters:
+        project: base-url-interceptor
+        test: false
 
-  - stage: Release
-    displayName: Release
-    jobs:
+- stage: Release
+  displayName: Release
+  jobs:
 
-      - template: /release.template.yaml
-        parameters:
-          project: base-url-interceptor
-          test: false
+    - template: /release.template.yaml
+      parameters:
+        project: base-url-interceptor
+        test: false
