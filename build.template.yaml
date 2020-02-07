@@ -8,7 +8,7 @@ jobs:
   steps:
   - template: /steps/npm/authenticate.yaml@templates
     parameters:
-      project: projects/audacia/${{parameters.project}}
+      path: projects/audacia/${{parameters.project}}
 
   - task: Npm@1
     displayName: Install
