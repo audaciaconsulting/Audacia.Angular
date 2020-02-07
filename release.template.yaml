@@ -6,7 +6,6 @@ jobs:
 - deployment: Deploy
   displayName: Deploy
   environment: NPM Internal
-  condition: and(succeeded(), and(not(eq(variables['Build.Reason'], 'PullRequest')), not(eq(variables['Build.Reason'], 'Schedule'))))
   pool:
     vmImage: windows-latest
   strategy:
