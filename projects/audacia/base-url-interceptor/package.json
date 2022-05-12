@@ -1,8 +1,9 @@
 {
   "name": "@audacia/base-url-interceptor",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "peerDependencies": {
     "@angular/common": ">=4.3.0",
     "@angular/core": ">=4.3.0"
-  }
+  },
+  "description": "Audacia's Angular HTTP Interceptor for setting a base URL for all HTTP requests"
 }
