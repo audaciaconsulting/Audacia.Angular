@@ -6,4 +6,5 @@ jobs:
 - template: /src/build/npm/jobs/npm-package.job.yaml@templates
   parameters:
     path: projects/audacia/${{parameters.project}}
+    test: ${{parameters.test}}
     displayName: Build
