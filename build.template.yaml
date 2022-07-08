@@ -3,8 +3,46 @@ parameters:
   test: true
 
 jobs:
-- template: /src/build/npm/jobs/npm-package.job.yaml@templates
-  parameters:
-    path: projects/audacia/${{parameters.project}}
-    test: ${{parameters.test}}
+- job: Build
+  displayName: Build
+  steps:
+  - template: /src/build/npm/tasks/authenticate.yaml@templates
+    parameters:
+      path: projects/audacia/${{parameters.project}}
+
+  - task: Npm@1
+    displayName: Install
+    inputs:
+      command: custom
+      workingDir: $(Build.SourcesDirectory)
+      verbose: false
+      customCommand: ci
+
+  - task: Npm@1
     displayName: Build
+    inputs:
+      command: custom
+      workingDir: $(Build.SourcesDirectory)
+      verbose: false
+      customCommand: run ng build @audacia/${{parameters.project}} --configuration=production
+
+  - template: /src/build/npm/tasks/test.yaml@templates
+    parameters:
+      project: projects/audacia/${{parameters.project}}
+      test: ${{parameters.test}}
+
+  - task: CopyFiles@2
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+    displayName: Copy .npmrc
+    inputs:
+      SourceFolder: projects/audacia/${{parameters.project}}
+      Contents: .npmrc
+      TargetFolder: dist/audacia/${{parameters.project}}
+
+
+  - task: PublishBuildArtifacts@1
+    condition: and(succeeded(), ne(variables['Build.Reason'], 'PullRequest'))
+    displayName: Publish
+    inputs:
+      PathtoPublish: dist/audacia/${{parameters.project}}
+      ArtifactName: $(Build.DefinitionName)
