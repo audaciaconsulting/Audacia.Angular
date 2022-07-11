@@ -6,8 +6,6 @@ jobs:
 - deployment: Deploy
   displayName: Deploy
   environment: NPM Internal
-  pool:
-    vmImage: windows-latest
   strategy:
     runOnce:
       deploy:
@@ -31,5 +29,5 @@ jobs:
             workingDir: $(Pipeline.Workspace)/$(Build.DefinitionName)
             verbose: false
             publishRegistry: useFeed
-            publishFeed: f09ace73-ace9-4751-ab42-2fada3f24d78
+            publishFeed: 'Audacia.Public/AudaciaPublic'
             publishPackageMetadata: true
