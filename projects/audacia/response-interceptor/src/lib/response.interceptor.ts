@@ -12,21 +12,23 @@ import {
     HttpHeaders
 } from '@angular/common/http';
 
-import { AudaciaResponseInterceptorOptions } from './response.interceptor.options';
+import {AudaciaResponseInterceptorOptions} from './response.interceptor.options';
 import { handlingNotRequiredHeaderName } from './response.interceptor.helpers';
+import {ResponseInterceptorRetryOptions} from "./response.interceptor.retry.options";
 
 export const AUDACIA_RESPONSE_INTERCEPTOR_OPTIONS = new InjectionToken('Audacia_Response_Interceptor_Options');
 
 @Injectable()
 export class AudaciaResponseHandlingInterceptor implements HttpInterceptor {
     private excludedRoutes: Array<string | RegExp>;
-    private customHandleSuccess: (response: any) => void;
-    private customHandleUnauthorized: (url: string) => void;
-    private customHandleForbidden: (url: string) => void;
-    private customHandleNotFound: (url: string) => void;
-    private customHandleTimeout: (url: string) => void;
-    private customHandleServerError: (body: any, url: string) => void;
-    private customHandleGeneric: (response: any, status: number, url: string) => void;
+    private readonly customHandleSuccess: (response: any) => void;
+    private readonly customHandleUnauthorized: (url: string) => void;
+    private readonly customHandleForbidden: (url: string) => void;
+    private readonly customHandleNotFound: (url: string) => void;
+    private readonly customHandleTimeout: (url: string) => void;
+    private readonly customHandleServerError: (body: any, url: string) => void;
+    private readonly customHandleGeneric: (response: any, status: number, url: string) => void;
+    private readonly retryConfiguration: ResponseInterceptorRetryOptions | null;
 
     constructor(@Inject(AUDACIA_RESPONSE_INTERCEPTOR_OPTIONS) config: AudaciaResponseInterceptorOptions) {
         this.excludedRoutes = (config && config.excludedRoutes) || [];
@@ -37,6 +39,7 @@ export class AudaciaResponseHandlingInterceptor implements HttpInterceptor {
         this.customHandleTimeout = config.handleTimeout;
         this.customHandleServerError = config.handleServerError;
         this.customHandleGeneric = config.handleGeneric;
+        this.retryConfiguration = config.retryConfiguration;
     }
 
     intercept(
@@ -67,15 +70,21 @@ export class AudaciaResponseHandlingInterceptor implements HttpInterceptor {
                         }
 
                         reader.readAsText(error.error);
-                    }
-                    else {
+                    } else {
                         this.processErrors(error, error.error);
+
+                        if(this.retryConfiguration
+                          && this.retryConfiguration.retryOnHandled
+                          && this.retryConfiguration.retryCodes.includes(error.status)) {
+                            return next.handle(request);
+                        }
                     }
                 }
 
                 return throwError(error);
             }));
         } else {
+            // This is an excluded route and can be handled as normal
             return next.handle(request);
         }
     }

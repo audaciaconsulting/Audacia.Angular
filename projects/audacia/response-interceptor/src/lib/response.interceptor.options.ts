@@ -1,4 +1,6 @@
-﻿export class AudaciaResponseInterceptorOptions {
+﻿import {ResponseInterceptorRetryOptions} from "./response.interceptor.retry.options";
+
+export class AudaciaResponseInterceptorOptions {
     excludedRoutes?: Array<string | RegExp>;
     handleSuccess?: (response: any) => void;
     handleUnauthorized?: (url: string) => void;
@@ -7,4 +9,5 @@
     handleTimeout?: (url: string) => void;
     handleServerError?: (body: any, url: string) => void;
     handleGeneric?: (response: any, status: number, url: string) => void;
+    retryConfiguration: ResponseInterceptorRetryOptions | null
 }

@@ -2,3 +2,4 @@ export { markResponseHandlingNotRequired } from './lib/response.interceptor.help
 export * from './lib/response.interceptor.options';
 export * from './lib/response.interceptor';
 export * from './lib/response.module';
+export * from "./lib/response.interceptor.retry.options";
