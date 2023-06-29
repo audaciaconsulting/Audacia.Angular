@@ -191,7 +191,7 @@ export class AudaciaResponseHandlingInterceptor implements HttpInterceptor {
     return Promise.resolve(request);
   }
 
-  // Converts a promise to an Observable and flattens Observable<Observable<HttpRequest<any> to Observable<HttpRequest<any>>
+  // Converts a promise to an Observable and flattens Observable<Observable<HttpRequest<any>>> to Observable<HttpRequest<any>>
   private toObservable(prom: Promise<void>,
                        error: HttpErrorResponse,
                        next: HttpHandler,
