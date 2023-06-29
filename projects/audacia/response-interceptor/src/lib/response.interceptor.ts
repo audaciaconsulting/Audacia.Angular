@@ -1,5 +1,5 @@
-import {defer, from, Observable, throwError} from 'rxjs';
-import {catchError, map, mergeAll, mergeMap} from 'rxjs/operators';
+import {from, Observable, throwError} from 'rxjs';
+import {catchError, map, mergeMap} from 'rxjs/operators';
 import {Injectable, Inject, InjectionToken} from '@angular/core';
 import {
   HttpRequest,
