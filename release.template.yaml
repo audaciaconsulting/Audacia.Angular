@@ -16,11 +16,10 @@ jobs:
           inputs:
             workingFile: $(Pipeline.Workspace)/$(Build.DefinitionName)/.npmrc
 
-        - task: AudaciaNpmVersioning@0
-          displayName: Version
+        - task: UpdateNpmVersions@1
+          displayName: NPM Versioning
           inputs:
-            packageJsonLocation: $(Pipeline.Workspace)/$(Build.DefinitionName)
-            packageName: '@audacia/${{parameters.project}}'
+            workingDirectory: $(Pipeline.Workspace)/$(Build.DefinitionName)
 
         - task: Npm@1
           displayName: Publish
