@@ -21,12 +21,12 @@ jobs:
           inputs:
             workingDirectory: $(Pipeline.Workspace)/$(Build.DefinitionName)
 
-#        - task: Npm@1
-#          displayName: Publish
-#          inputs:
-#            command: publish
-#            workingDir: $(Pipeline.Workspace)/$(Build.DefinitionName)
-#            verbose: false
-#            publishRegistry: useFeed
-#            publishFeed: 'Audacia.Public/AudaciaPublic'
-#            publishPackageMetadata: true
+        - task: Npm@1
+          displayName: Publish
+          inputs:
+            command: publish
+            workingDir: $(Pipeline.Workspace)/$(Build.DefinitionName)
+            verbose: false
+            publishRegistry: useFeed
+            publishFeed: 'Audacia.Public/AudaciaPublic'
+            publishPackageMetadata: true
