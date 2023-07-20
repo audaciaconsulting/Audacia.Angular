@@ -1,9 +1,11 @@
 {
+  "author": "Audacia",
   "name": "@audacia/jwt-interceptor",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "peerDependencies": {
     "@angular/common": ">=4.3.0",
     "@angular/core": ">=4.3.0"
   },
-  "description": "Audacia's Angular HTTP Interceptor for handling JWT Tokens"
+  "description": "Audacia's Angular HTTP Interceptor for handling JWT Tokens",
+  "license": "MIT"
 }
