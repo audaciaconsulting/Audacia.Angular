@@ -12,14 +12,9 @@ This library does also not have any functionality for implementing token refresh
 
 > **Note:** This library can only be used with Angular 4.3 and higher because it relies on an `HttpInterceptor` from Angular's `HttpClient`. This feature is not available on lower versions.
 
-## Pre-Installation
-
-First thing that you will need to do is ensure that you have a registry entry for our NPM registry. To do this, follow the steps listed [here](https://audacia.visualstudio.com/Audacia/Audacia%20Team/_wiki/wikis/Audacia.wiki?wikiVersion=GBwikiMaster&pagePath=%2FAudacia%20Wiki%2FCode%2FConfiguring%20a%20local%20machine%20to%20access%20the%20Audacia%20NPM%20registry).
-
-
 ## Installation
 
-Now that you have the registries setup you can install the package.
+Install the package using the below.
 
 ```bash
 # installation with npm
@@ -310,11 +305,6 @@ export function jwtOptionsFactory(tokenService) {
 
 NOTE: If a `jwtOptionsFactory` is defined, then `config` is ignored. _Both configuration alternatives can't be defined at the same time_.
 
-## Issue Reporting
+# Contributing
 
-If you have found a bug or if you have a feature request, then please email me `liam.ward@audacia.co.uk` or add it to the `Audacia` VSTS board if that is allowed?
-
-## Author
-
-Liam Ward on behalf of Audacia.
-
+We welcome contributions! Please feel free to check our [Contribution Guidlines](https://github.com/audaciaconsulting/.github/blob/main/CONTRIBUTING.md) for feature requests, issue reporting and guidelines.
