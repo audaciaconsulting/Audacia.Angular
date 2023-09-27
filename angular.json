@@ -25,12 +25,12 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": [],
-              "vendorChunk": true,
-              "extractLicenses": false,
-              "buildOptimizer": false,
-              "sourceMap": true,
-              "optimization": false,
-              "namedChunks": true
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -43,7 +43,6 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
               "extractLicenses": true,
               "vendorChunk": false,
@@ -62,7 +61,7 @@
               ]
             }
           },
-            "defaultConfiguration": ""
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -91,17 +90,6 @@
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": []
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**"]
           }
         },
         "e2e": {
@@ -143,16 +131,6 @@
             "tsConfig": "projects/audacia/base-url-interceptor/tsconfig.spec.json",
             "karmaConfig": "projects/audacia/base-url-interceptor/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/audacia/base-url-interceptor/tsconfig.lib.json",
-              "projects/audacia/base-url-interceptor/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -180,16 +158,6 @@
             "main": "projects/audacia/date-parse-interceptor/src/test.ts",
             "tsConfig": "projects/audacia/date-parse-interceptor/tsconfig.spec.json",
             "karmaConfig": "projects/audacia/date-parse-interceptor/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/audacia/date-parse-interceptor/tsconfig.lib.json",
-              "projects/audacia/date-parse-interceptor/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -219,16 +187,6 @@
             "tsConfig": "projects/audacia/jwt-interceptor/tsconfig.spec.json",
             "karmaConfig": "projects/audacia/jwt-interceptor/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/audacia/jwt-interceptor/tsconfig.lib.json",
-              "projects/audacia/jwt-interceptor/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -257,16 +215,6 @@
             "tsConfig": "projects/audacia/request-disable-interceptor/tsconfig.spec.json",
             "karmaConfig": "projects/audacia/request-disable-interceptor/karma.conf.js"
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/audacia/request-disable-interceptor/tsconfig.lib.json",
-              "projects/audacia/request-disable-interceptor/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
         }
       }
     },
@@ -294,16 +242,6 @@
             "main": "projects/audacia/response-interceptor/src/test.ts",
             "tsConfig": "projects/audacia/response-interceptor/tsconfig.spec.json",
             "karmaConfig": "projects/audacia/response-interceptor/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/audacia/response-interceptor/tsconfig.lib.json",
-              "projects/audacia/response-interceptor/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
           }
         }
       }
