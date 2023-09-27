@@ -24,7 +24,7 @@ export interface JwtModuleOptions {
 
 @NgModule()
 export class JwtModule {
-    static forRoot(options: JwtModuleOptions): ModuleWithProviders {
+    static forRoot(options: JwtModuleOptions): ModuleWithProviders<JwtModule> {
         return {
             ngModule: JwtModule,
             providers: [

@@ -11,7 +11,7 @@ export class BaseUrlProviderOptions {
 
 @NgModule()
 export class AudaciaBaseUrlModule {
-  static forRoot(options: BaseUrlProviderOptions): ModuleWithProviders {
+  static forRoot(options: BaseUrlProviderOptions): ModuleWithProviders<AudaciaBaseUrlModule> {
     return {
       ngModule: AudaciaBaseUrlModule,
       providers: [

@@ -22,10 +22,15 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
-            "scripts": []
+            "scripts": [],
+            "vendorChunk": true,
+            "extractLicenses": false,
+            "buildOptimizer": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true
           },
           "configurations": {
             "production": {
@@ -38,9 +43,7 @@
               "optimization": true,
               "outputHashing": "all",
               "sourceMap": false,
-              "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -57,7 +60,8 @@
                 }
               ]
             }
-          }
+          },
+          "defaultConfiguration": ""
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -88,17 +92,6 @@
             "scripts": []
           }
         },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "tsconfig.app.json",
-              "tsconfig.spec.json",
-              "e2e/tsconfig.json"
-            ],
-            "exclude": ["**/node_modules/**"]
-          }
-        },
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -120,10 +113,15 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/audacia/base-url-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/base-url-interceptor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/audacia/base-url-interceptor/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -132,16 +130,6 @@
             "main": "projects/audacia/base-url-interceptor/src/test.ts",
             "tsConfig": "projects/audacia/base-url-interceptor/tsconfig.spec.json",
             "karmaConfig": "projects/audacia/base-url-interceptor/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/audacia/base-url-interceptor/tsconfig.lib.json",
-              "projects/audacia/base-url-interceptor/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -153,10 +141,15 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/audacia/date-parse-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/date-parse-interceptor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/audacia/date-parse-interceptor/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -165,16 +158,6 @@
             "main": "projects/audacia/date-parse-interceptor/src/test.ts",
             "tsConfig": "projects/audacia/date-parse-interceptor/tsconfig.spec.json",
             "karmaConfig": "projects/audacia/date-parse-interceptor/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/audacia/date-parse-interceptor/tsconfig.lib.json",
-              "projects/audacia/date-parse-interceptor/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -186,10 +169,15 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/audacia/jwt-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/jwt-interceptor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/audacia/jwt-interceptor/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -198,16 +186,6 @@
             "main": "projects/audacia/jwt-interceptor/src/test.ts",
             "tsConfig": "projects/audacia/jwt-interceptor/tsconfig.spec.json",
             "karmaConfig": "projects/audacia/jwt-interceptor/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/audacia/jwt-interceptor/tsconfig.lib.json",
-              "projects/audacia/jwt-interceptor/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -219,10 +197,15 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/audacia/request-disable-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/request-disable-interceptor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/audacia/request-disable-interceptor/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -231,16 +214,6 @@
             "main": "projects/audacia/request-disable-interceptor/src/test.ts",
             "tsConfig": "projects/audacia/request-disable-interceptor/tsconfig.spec.json",
             "karmaConfig": "projects/audacia/request-disable-interceptor/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/audacia/request-disable-interceptor/tsconfig.lib.json",
-              "projects/audacia/request-disable-interceptor/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
           }
         }
       }
@@ -252,10 +225,15 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/audacia/response-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/response-interceptor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/audacia/response-interceptor/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -264,16 +242,6 @@
             "main": "projects/audacia/response-interceptor/src/test.ts",
             "tsConfig": "projects/audacia/response-interceptor/tsconfig.spec.json",
             "karmaConfig": "projects/audacia/response-interceptor/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/audacia/response-interceptor/tsconfig.lib.json",
-              "projects/audacia/response-interceptor/tsconfig.spec.json"
-            ],
-            "exclude": ["**/node_modules/**"]
           }
         }
       }

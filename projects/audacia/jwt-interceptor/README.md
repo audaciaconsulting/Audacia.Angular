@@ -2,15 +2,13 @@
 
 ### **NOTE:** This library borrows heavily from the [@auth0/angular-jwt](https://github.com/auth0/angular2-jwt) library. The main change is that it deals a bit better with token getters that use `Http` requests
 
-This library is currently for use with Angular4-5. A separate version will need to created for Angular 6, to then work with RxJs 6+. A template for this can be found at the link provided above.
-
 This library provides an `HttpInterceptor` which automatically attaches a [JSON Web Token](https://jwt.io) to `HttpClient` requests.
 
 This library does not have any functionality for implementing user authentication and retrieving JWTs to begin with. Those details will vary depending on your setup, but in most cases, you will use a regular HTTP request to authenticate your users and then save their JWTs in local storage or in a cookie if successful.
 
 This library does also not have any functionality for implementing token refresh. Again, this will depend on your setup and should be configured accordingly.
 
-> **Note:** This library can only be used with Angular 4.3 and higher because it relies on an `HttpInterceptor` from Angular's `HttpClient`. This feature is not available on lower versions.
+> **Note:** This library can only be used with Angular 12.0.0 and higher.
 
 ## Installation
 

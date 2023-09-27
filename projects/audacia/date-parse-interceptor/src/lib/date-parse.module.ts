@@ -11,7 +11,7 @@ export class DateParseProviderOptions {
 
 @NgModule()
 export class AudaciaDateParseModule {
-  static forRoot(options: DateParseProviderOptions): ModuleWithProviders {
+  static forRoot(options: DateParseProviderOptions): ModuleWithProviders<AudaciaDateParseModule> {
     return {
       ngModule: AudaciaDateParseModule,
       providers: [

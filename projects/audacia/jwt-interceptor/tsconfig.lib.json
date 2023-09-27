@@ -5,14 +5,15 @@
     "target": "es2015",
     "declaration": true,
     "inlineSources": true,
-    "types": [],
+    "types": [
+      "node"
+    ],
     "lib": [
       "dom",
       "es2018"
     ]
   },
   "angularCompilerOptions": {
-    "annotateForClosureCompiler": true,
     "skipTemplateCodegen": true,
     "strictMetadataEmit": true,
     "fullTemplateTypeCheck": true,
