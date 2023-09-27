@@ -119,7 +119,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/audacia/base-url-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/base-url-interceptor/ng-package.json"
@@ -157,7 +157,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/audacia/date-parse-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/date-parse-interceptor/ng-package.json"
@@ -195,7 +195,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/audacia/jwt-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/jwt-interceptor/ng-package.json"
@@ -233,7 +233,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/audacia/request-disable-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/request-disable-interceptor/ng-package.json"
@@ -271,7 +271,7 @@
       "prefix": "lib",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
+          "builder": "@angular-devkit/build-angular:ng-packagr",
           "options": {
             "tsConfig": "projects/audacia/response-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/response-interceptor/ng-package.json"
