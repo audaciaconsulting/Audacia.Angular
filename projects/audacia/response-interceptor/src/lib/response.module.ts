@@ -16,7 +16,7 @@ export interface IAudaciaResponseInterceptorModuleOptions {
     ]
 })
 export class AudaciaResponseInterceptorModule {
-    static forRoot(options?: IAudaciaResponseInterceptorModuleOptions): ModuleWithProviders {
+    static forRoot(options?: IAudaciaResponseInterceptorModuleOptions): ModuleWithProviders<AudaciaResponseInterceptorModule> {
         return {
             ngModule: AudaciaResponseInterceptorModule,
             providers: [

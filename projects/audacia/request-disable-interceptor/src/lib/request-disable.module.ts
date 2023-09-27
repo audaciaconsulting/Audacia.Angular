@@ -19,7 +19,7 @@ export interface IRequestDisableInterceptorModuleOptions {
 export class RequestDisableModule {
     static forRoot(
         options?: IRequestDisableInterceptorModuleOptions
-    ): ModuleWithProviders {
+    ): ModuleWithProviders<RequestDisableModule> {
         return {
             ngModule: RequestDisableModule,
             providers: [

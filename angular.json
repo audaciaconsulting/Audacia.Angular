@@ -22,7 +22,7 @@
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": ["src/favicon.ico", "src/assets"],
             "styles": ["src/styles.scss"],
             "scripts": []
@@ -40,7 +40,6 @@
               "sourceMap": false,
               "extractCss": true,
               "namedChunks": false,
-              "aot": true,
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true,
@@ -124,6 +123,11 @@
           "options": {
             "tsConfig": "projects/audacia/base-url-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/base-url-interceptor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/audacia/base-url-interceptor/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -157,6 +161,11 @@
           "options": {
             "tsConfig": "projects/audacia/date-parse-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/date-parse-interceptor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/audacia/date-parse-interceptor/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -190,6 +199,11 @@
           "options": {
             "tsConfig": "projects/audacia/jwt-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/jwt-interceptor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/audacia/jwt-interceptor/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -223,6 +237,11 @@
           "options": {
             "tsConfig": "projects/audacia/request-disable-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/request-disable-interceptor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/audacia/request-disable-interceptor/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
@@ -256,6 +275,11 @@
           "options": {
             "tsConfig": "projects/audacia/response-interceptor/tsconfig.lib.json",
             "project": "projects/audacia/response-interceptor/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/audacia/response-interceptor/tsconfig.lib.prod.json"
+            }
           }
         },
         "test": {
