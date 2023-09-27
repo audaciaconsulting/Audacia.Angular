@@ -4,7 +4,7 @@ This library is currently for use with RxJs 6+.
 
 This library provides an `HttpInterceptor` which automatically parses any dates coming from a request into the required object type.
 
-> **Note:** This library can only be used with Angular 4.3 and higher because it relies on an `HttpInterceptor` from Angular's `HttpClient`. This feature is not available on lower versions.
+> **Note:** This library can only be used with Angular 12.0.0 and higher.
 
 ## Installation
 

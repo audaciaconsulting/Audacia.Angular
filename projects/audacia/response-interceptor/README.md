@@ -2,7 +2,7 @@
 
 This library provides an `HttpInterceptor` which automatically displays pop up notifications for success/errors. This depends on you utilising the `ApiResponse` class that is in most projects API.
 
-> **Note:** This library can only be used with Angular 4.3 and higher because it relies on an `HttpInterceptor` from Angular's `HttpClient`. This feature is not available on lower versions.
+> **Note:** This library can only be used with Angular 12.0.0 and higher.
 
 ## Installation
 
