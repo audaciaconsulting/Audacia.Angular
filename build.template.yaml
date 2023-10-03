@@ -24,7 +24,7 @@ jobs:
       command: custom
       workingDir: $(Build.SourcesDirectory)
       verbose: false
-      customCommand: run ng build @audacia/${{parameters.project}} --configuration=production
+      customCommand: run build-prod @audacia/${{parameters.project}}
 
   - template: /src/build/npm/tasks/test.yaml@templates
     parameters:
