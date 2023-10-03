@@ -2,7 +2,7 @@ name: $(Year:yy)$(DayOfYear).$(Rev:r)
 trigger: { branches: { include: [ master ] }, paths: { include: [ /projects/audacia/response-interceptor ] } }
 pr: { branches: { include: [master] } }
 resources: { repositories: [ { repository: templates, type: git, name: Audacia/Audacia.Build } ] }
-pool: { name: Prometheus }
+pool: { vmImage: windows-latest }
 
 stages:
 
