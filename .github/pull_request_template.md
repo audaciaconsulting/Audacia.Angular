@@ -32,8 +32,3 @@
 - ✔ No new security vulnerabilities introduced
 - ❌ New security vulnerabilities found
 - ❎ No new dependencies or changes affecting security
-
-### ESLint rules verified
-- ✔ All new/modified ESLint rules are verified and documented
-- ❌ New/modified ESLint rules are not verified or documented
-- ❎ No changes to ESLint rules
