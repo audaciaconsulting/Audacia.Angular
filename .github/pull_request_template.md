@@ -23,9 +23,6 @@
 - ❌ Licenses of new/upgraded dependencies have not been checked, or check with copyleft dependencies introduced
 - ❎ No new/upgraded dependencies
 
-### Linting and formatting
-- ✔ Code is linted and formatted according to the project's guidelines
-- ❌ Code is not linted or formatted correctly
 - ❎ No code changes
 
 ### Security vulnerabilities checked
