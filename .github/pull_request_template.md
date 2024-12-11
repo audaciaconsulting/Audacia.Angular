@@ -37,8 +37,3 @@
 - ✔ All new/modified ESLint rules are verified and documented
 - ❌ New/modified ESLint rules are not verified or documented
 - ❎ No changes to ESLint rules
-
-### Playwright configurations verified
-- ✔ All new/modified Playwright configurations are verified and documented
-- ❌ New/modified Playwright configurations are not verified or documented
-- ❎ No changes to Playwright configurations
