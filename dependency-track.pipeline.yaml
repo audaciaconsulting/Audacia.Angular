@@ -1,0 +1,118 @@
+# Pipeline to build the latest features for deployment
+name: $(Year:yy)$(DayOfYear).$(rev:r)
+trigger: none
+pr: none
+
+resources:
+  repositories:
+    - repository: templates
+      type: github
+      endpoint: shared-github
+      name: audaciaconsulting/Audacia.Build
+      ref: refs/heads/feature/203056-derive-version-from-the-package.json-or-csproj-when-not-provided
+
+pool:
+  vmImage: windows-latest
+
+# ---------------------------------------------------------------------------------
+# NOTE: Ensure your application / project names in package.json and .csproj files
+# are sensible and representative. These names are used as the Project name in
+# Dependency-Track when SBOMs are uploaded.
+# ---------------------------------------------------------------------------------
+
+# Central variables
+variables:
+  - group: Audacia.Libraries.Dependency-Track
+
+  # Secrets / env
+  - name: DT_API_KEY
+    value: $(DT-API-KEY)
+  - name: DT_API_URL
+    value: 'https://api.dependency-track.audacia.tech/api'
+
+  # Template-parameter variables
+  - name: systemName
+    value: Audacia.Libraries
+  - name: envName
+    value: dev
+  - name: additionalTags
+    value: ' '     # e.g. "owner:team-olympus, service:tickets, priority:high"
+  - name: deactivateOld
+    value: true    # mark non-latest versions inactive after upload
+
+  # Project paths and settings
+  - name: UiNpmRoot
+    value: $(System.DefaultWorkingDirectory)
+  - name: nodeVersion
+    value: '22.x'
+  - name: artifactName
+    value: 'sbom-files'
+  - name: publishArtifact
+    value: true
+  - name: failOnUploadError
+    value: true
+  - name: tryDownloadArtifact
+    value: true
+
+  # Optional parent project wiring (camelCase because passed to params)
+  - name: parentProjectName
+    value: 'Audacia - Libraries'
+  - name: parentProjectVersion
+    value: ''
+
+stages:
+  # =========================
+  # 1) GENERATE STAGE
+  # =========================
+  - stage: generate
+    displayName: "Generate SBOMs (npm + .NET via CycloneDX)"
+    jobs:
+      - job: generate_sbom
+        displayName: "Generate SBOMs & publish artifact"
+        steps:
+          # Generate npm SBOMs
+          - template: /src/security/dependency-track/steps/generate-npm-sbom.steps.yaml@templates
+            parameters:
+              npmRoots: $(UiNpmRoot)
+              nodeVersion: $(nodeVersion)
+              includeLicenseTexts: true
+              publishArtifact: true
+              artifactName: $(artifactName)
+
+  # =========================
+  # 2) UPLOAD STAGE
+  # =========================
+  - stage: upload
+    displayName: "Upload SBOMs to Dependency-Track"
+    dependsOn: generate
+    jobs:
+      - job: upload_sbom
+        displayName: "Upload SBOM & Log Summary"
+        steps:
+          - checkout: none
+          - template: /src/security/dependency-track/steps/upload-sbom.steps.yaml@templates
+            parameters:
+              envName: $(envName)
+              additionalTags: $(additionalTags)
+              systemName: $(systemName)
+              failOnUploadError: ${{ variables.failOnUploadError }}
+              parentProjectName: ${{ variables.parentProjectName }}
+              parentProjectVersion: ${{ variables.parentProjectVersion }}
+
+  # =========================
+  # 3) DEACTIVATE STAGE (run standalone or after upload)
+  # =========================
+  - stage: deactivate
+    displayName: "Deactivate old Dependency-Track project versions"
+    dependsOn: upload
+    condition: and(succeeded('upload'), eq(variables['deactivateOld'], true))
+    jobs:
+      - job: deactivate_old_versions
+        displayName: "Set non-latest versions to inactive"
+        steps:
+          - checkout: none
+          - template: /src/security/dependency-track/steps/deactivate-nonlatest.steps.yaml@templates
+            parameters:
+              artifactName: $(artifactName)
+              tryDownloadArtifact: ${{ variables.tryDownloadArtifact }}
+              parentProjectName: ${{ variables.parentProjectName }}
