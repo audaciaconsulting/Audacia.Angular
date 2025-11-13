@@ -79,7 +79,7 @@ stages:
                 $(requestDisableInterceptorPackageJson)
                 $(responseInterceptorPackageJson)
               includeLicenseTexts: true
-              publishArtifact: false
+              publishArtifact: ${{ variables.publishArtifact }}
               artifactName: $(artifactName)
 
   # =========================
